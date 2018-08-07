@@ -63,7 +63,7 @@ export function lex (state) {
         lexComment(state)
       } else {
         const tagName = lexTag(state)
-        const safeTag = tagName.toLowerCase()
+        const safeTag = tagName
         if (arrayIncludes(childlessTags, safeTag)) {
           lexSkipTag(tagName, state)
         }
@@ -273,7 +273,7 @@ const push = [].push
 
 export function lexSkipTag (tagName, state) {
   const {str, position, tokens} = state
-  const safeTagName = tagName.toLowerCase()
+  const safeTagName = tagName
   const len = str.length
   let index = position.index
   while (index < len) {
@@ -287,7 +287,7 @@ export function lexSkipTag (tagName, state) {
     jumpPosition(tagStartPosition, str, nextTag)
     const tagState = {str, position: tagStartPosition, tokens: []}
     const name = lexTag(tagState)
-    if (safeTagName !== name.toLowerCase()) {
+    if (safeTagName !== name) {
       index = tagState.position.index
       continue
     }

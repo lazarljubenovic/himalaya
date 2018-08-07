@@ -303,13 +303,13 @@ test('parser() should report the element attributes', t => {
 })
 
 test('parser() should handle unclosed elements', t => {
-  const str = '<div>abc'
+  const str = '<Component>abc'
   const tokens = lexer(str, lexerOptions)
   const nodes = parser(tokens, parserOptions)
   t.deepEqual(nodes, [
     {
       type: 'element',
-      tagName: 'div',
+      tagName: 'Component',
       attributes: [],
       position: {
         start: ps(0),
@@ -320,7 +320,7 @@ test('parser() should handle unclosed elements', t => {
           type: 'text',
           content: 'abc',
           position: {
-            start: ps(5),
+            start: ps(11),
             end: ps(str.length)
           }
         }
@@ -347,40 +347,40 @@ test('parser() should preserve case-sensitive tag names', t => {
   ])
 })
 
-test('parser() should match by case-insensitive tags', t => {
-  const str = '<div>abc</DIV>def'
-  const tokens = lexer(str, lexerOptions)
-  const nodes = parser(tokens, parserOptions)
-  t.deepEqual(nodes, [
-    {
-      type: 'element',
-      tagName: 'div',
-      attributes: [],
-      position: {
-        start: ps(0),
-        end: ps(14)
-      },
-      children: [
-        {
-          type: 'text',
-          content: 'abc',
-          position: {
-            start: ps(5),
-            end: ps(8)
-          }
-        }
-      ]
-    },
-    {
-      type: 'text',
-      content: 'def',
-      position: {
-        start: ps(14),
-        end: ps(17)
-      }
-    }
-  ])
-})
+// test('parser() should match by case-insensitive tags', t => {
+//   const str = '<div>abc</DIV>def'
+//   const tokens = lexer(str, lexerOptions)
+//   const nodes = parser(tokens, parserOptions)
+//   t.deepEqual(nodes, [
+//     {
+//       type: 'element',
+//       tagName: 'div',
+//       attributes: [],
+//       position: {
+//         start: ps(0),
+//         end: ps(14)
+//       },
+//       children: [
+//         {
+//           type: 'text',
+//           content: 'abc',
+//           position: {
+//             start: ps(5),
+//             end: ps(8)
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       type: 'text',
+//       content: 'def',
+//       position: {
+//         start: ps(14),
+//         end: ps(17)
+//       }
+//     }
+//   ])
+// })
 
 test('parser() should handle ancestor breaker special case (#39)', t => {
   /*

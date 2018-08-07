@@ -49,7 +49,7 @@ export function parse (state) {
 
     const tagToken = tokens[++cursor]
     cursor++
-    const tagName = tagToken.content.toLowerCase()
+    const tagName = tagToken.content
     if (token.close) {
       let index = stack.length
       let shouldRewind = false

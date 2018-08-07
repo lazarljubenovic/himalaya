@@ -355,19 +355,19 @@ test('lexSkipTag should tokenize as text until the matching tag name', t => {
   ])
 })
 
-test('lexSkipTag should stop at the case-insensitive matching tag name', t => {
-  const str = '<tEsT>proving <???> the point</TeSt><x>'
-  const finish = str.indexOf('<x>')
-  const state = {str, position: ps(6), tokens: []}
-  lexSkipTag('tEsT', state)
-  t.is(state.position.index, finish)
-  t.deepEqual(state.tokens, [
-    {type: 'text', content: 'proving <???> the point', position: {start: ps(6), end: ps(29)}},
-    {type: 'tag-start', close: true, position: {start: ps(29)}},
-    {type: 'tag', content: 'TeSt'},
-    {type: 'tag-end', close: false, position: {end: ps(finish)}}
-  ])
-})
+// test('lexSkipTag should stop at the case-insensitive matching tag name', t => {
+//   const str = '<tEsT>proving <???> the point</TeSt><x>'
+//   const finish = str.indexOf('<x>')
+//   const state = {str, position: ps(6), tokens: []}
+//   lexSkipTag('tEsT', state)
+//   t.is(state.position.index, finish)
+//   t.deepEqual(state.tokens, [
+//     {type: 'text', content: 'proving <???> the point', position: {start: ps(6), end: ps(29)}},
+//     {type: 'tag-start', close: true, position: {start: ps(29)}},
+//     {type: 'tag', content: 'TeSt'},
+//     {type: 'tag-end', close: false, position: {end: ps(finish)}}
+//   ])
+// })
 
 test('lexSkipTag should auto-close if the end tag is not found', t => {
   const str = '<script>This never ends'
